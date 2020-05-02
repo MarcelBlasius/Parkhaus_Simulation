@@ -1,6 +1,6 @@
 package uebung2;
 
-public interface Sortiert {
+public interface SortiertIF {
 	
 	boolean isWellSorted(String[] sequence);
 
