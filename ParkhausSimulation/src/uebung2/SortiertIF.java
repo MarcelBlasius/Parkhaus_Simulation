@@ -7,4 +7,6 @@ public interface SortiertIF {
 	String[][] transitivitaetAufloesen(String[][] s);
 	
 	String[][] getAbhaengigkeiten();
+	
+	boolean doppelteAufgabe(String[] s);
 }
