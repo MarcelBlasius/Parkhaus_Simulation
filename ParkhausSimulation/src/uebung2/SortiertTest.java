@@ -8,12 +8,15 @@ import org.junit.jupiter.api.Test;
 
 class SortiertTest {
 
-	SortiertIF s;
+	SortiertIF s,transitivSortiert;
+	
 	
 	@BeforeEach
 	protected void setUp() {
 		String [][] p = {{ "A" , "C" },{ "C", "D" },{ "B", "C" }};
 		s = new Sortiert(p);
+		String [][] t = {{"A","B"},{"B","C"},{"C","D"}};
+		transitivSortiert = new Sortiert(t);
 	}
 	
 	@Test
@@ -29,4 +32,12 @@ class SortiertTest {
 		String [] sequence = {"C","B","A","D"};
 		assertEquals(false,s.isWellSorted(sequence));
 	}
+	
+	@Test
+	@DisplayName("Transitivitaet wird korrekt aufgeloest")
+	void testTransitivitaet() {
+		String [][] sequence = {{"A","B"},{"B","C"},{"C","D"},{"A","C"},{"B","D"},{"A","D"}};
+		assertEquals(sequence,transitivSortiert.transitivitaetAufloesen(transitivSortiert.getAbhaengigkeiten()));
+	}
+	//String [][] t = {{"A","B"},{"B","C"},{"C","D"}};
 }
