@@ -37,7 +37,22 @@ class SortiertTest {
 	@DisplayName("Transitivitaet wird korrekt aufgeloest")
 	void testTransitivitaet() {
 		String [][] sequence = {{"A","B"},{"B","C"},{"C","D"},{"A","C"},{"B","D"},{"A","D"}};
-		assertEquals(sequence,transitivSortiert.transitivitaetAufloesen(transitivSortiert.getAbhaengigkeiten()));
+		assertEquals(true,sequence.equals(transitivSortiert.transitivitaetAufloesen(transitivSortiert.getAbhaengigkeiten())));
 	}
-	//String [][] t = {{"A","B"},{"B","C"},{"C","D"}};
+	
+	@Test
+	@DisplayName("Sequenz wird aufgrund von Transitivitaet abgelehnt")
+	void testSequenzIsNotWellSortedBecauseOfTransitivitaet() {
+		SortiertIF u  = new Sortiert({{"A","B"},{"B","C"}});
+		String [] sequence = {"C","A"};
+ 		assertEquals(false,u.isWellSorted(sequence));
+	}
+	
+	@Test
+	@DisplayName("Sequenz wird aufgrund von Transitivitaet abgelehnt")
+	void testSequenzIsNotWellSortedBecauseOfTransitivitaet() {
+		SortiertIF u  = new Sortiert({{"A","B"},{"B","C"}});
+		String [] sequence = {"C","A"};
+ 		assertEquals(false,u.isWellSorted(sequence));
+	}
 }
