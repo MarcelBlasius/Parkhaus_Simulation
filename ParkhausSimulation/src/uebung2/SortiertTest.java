@@ -49,10 +49,18 @@ class SortiertTest {
 	}
 	
 	@Test
-	@DisplayName("Sequenz wird aufgrund von Transitivitaet abgelehnt")
-	void testSequenzIsNotWellSortedBecauseOfTransitivitaet() {
-		SortiertIF u  = new Sortiert({{"A","B"},{"B","C"}});
-		String [] sequence = {"C","A"};
+	@DisplayName("Dopplung wird erkannt")
+	void testDopplungen() {
+		String [] sequence = {"C","A","C"};
+ 		assertEquals(true,s.doppelteAufgabe(sequence));
+	}
+	
+	@Test
+	@DisplayName("Sequenz mit Dopplung wird abgelehnt")
+	void testIsWellSortedDopplungen() {
+		SortiertIF u  = new Sortiert({{"A","B"},{"C","D"}});
+		String [] sequence = {"C","C","A"};
  		assertEquals(false,u.isWellSorted(sequence));
 	}
+	
 }
