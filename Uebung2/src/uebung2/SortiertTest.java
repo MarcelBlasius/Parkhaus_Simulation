@@ -2,6 +2,9 @@ package uebung2;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.Arrays;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -36,14 +39,18 @@ class SortiertTest {
 	@Test
 	@DisplayName("Transitivitaet wird korrekt aufgeloest")
 	void testTransitivitaet() {
+		System.out.println(transitivSortiert.transitivitaetAufloesen(transitivSortiert.getAbhaengigkeiten())[2][0]);
 		String [][] sequence = {{"A","B"},{"B","C"},{"C","D"},{"A","C"},{"B","D"},{"A","D"}};
-		assertEquals(true,sequence.equals(transitivSortiert.transitivitaetAufloesen(transitivSortiert.getAbhaengigkeiten())));
+		assertEquals(true,Arrays.deepEquals(sequence,transitivSortiert.transitivitaetAufloesen(transitivSortiert.getAbhaengigkeiten())));
 	}
+	
+	
 	
 	@Test
 	@DisplayName("Sequenz wird aufgrund von Transitivitaet abgelehnt")
 	void testSequenzIsNotWellSortedBecauseOfTransitivitaet() {
-		SortiertIF u  = new Sortiert({{"A","B"},{"B","C"}});
+		String[][] tmp = {{"A","B"},{"B","C"}};
+		SortiertIF u  = new Sortiert(tmp);
 		String [] sequence = {"C","A"};
  		assertEquals(false,u.isWellSorted(sequence));
 	}
@@ -58,7 +65,8 @@ class SortiertTest {
 	@Test
 	@DisplayName("Sequenz mit Dopplung wird abgelehnt")
 	void testIsWellSortedDopplungen() {
-		SortiertIF u  = new Sortiert({{"A","B"},{"C","D"}});
+		String[][] tmp = {{"A","B"},{"C","D"}};
+		SortiertIF u  = new Sortiert(tmp);
 		String [] sequence = {"C","C","A"};
  		assertEquals(false,u.isWellSorted(sequence));
 	}
